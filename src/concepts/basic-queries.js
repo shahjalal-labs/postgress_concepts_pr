@@ -77,9 +77,31 @@ const updateUser = async (email, newEmail) => {
 };
 //w: (end)  ╰──────────── updateUser ────────────╯
 
+const deleteQuery = async (username) => {
+  const deleteQuery = `
+    DELETE FROM users
+    WHERE username = $1
+    RETURNING *
+`;
+
+  try {
+    const res = await db.query(deleteQuery, [username]);
+    if (res.rows.length) {
+      console.log("User deleted successfully!", res.rows);
+      return res.rows;
+    } else {
+      console.log(`No user found with ${username}`);
+      return null;
+    }
+  } catch (error) {
+    console.error(error, "[1;31merror in basic-queries.js at line 89[0m");
+  }
+};
+
 module.exports = {
   createUsersTable,
   insertUser,
   getAllUsers,
   updateUser,
+  deleteQuery,
 };

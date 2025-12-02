@@ -3,6 +3,7 @@ const {
   insertUser,
   getAllUsers,
   updateUser,
+  deleteQuery,
 } = require("./concepts/basic-queries");
 
 //
@@ -18,10 +19,13 @@ async function testBasicQueries() {
     const result = await getAllUsers();
 
     console.log(result, "[1;31mresult in main.js at line 18[0m");
-    const updateUserResult = await updateUser(
+    /* const updateUserResult = await updateUser(
       "sangam@gmail.com",
       "sangam33@gmail.com",
-    );
+    ); */
+
+    const deleteUserResult = await deleteQuery("hasan");
+    console.log(deleteUserResult, "[1;31mresult in main.js at line 22[0m");
   } catch (error) {
     console.error("Error", error);
   }
