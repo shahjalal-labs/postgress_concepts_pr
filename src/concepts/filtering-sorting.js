@@ -18,6 +18,7 @@ async function getUsersWhere(condition) {
 
 //w: (end)  ╰──────────── getUsersWhere ────────────╯
 
+//w: (start)╭──────────── getSortedUsers ────────────╮
 async function getSortedUsers(column, order = "DESC") {
   const getSortedUsersQuery = `
     select * from users
@@ -30,8 +31,26 @@ async function getSortedUsers(column, order = "DESC") {
     console.error(error, error.message || "eror in getSortedUsers");
   }
 }
+//w: (end)  ╰──────────── getSortedUsers ────────────╯
+
+//w: (start)╭──────────── getPaginatedUsers ────────────╮
+async function getPaginatedUsers(limit, offest) {
+  const getPaginatedQuery = `
+    SELECT * FROM users
+    LIMIT $1 OFFSET $2
+`;
+
+  try {
+    const result = await dbAsAnyName.query(getPaginatedQuery, [limit, offest]);
+    return result.rows;
+  } catch (error) {
+    console.error(error, error.message || " eror in getPaginatedUsers");
+  }
+}
+//w: (end)  ╰──────────── getPaginatedUsers ────────────╯
 
 module.exports = {
   getUsersWhere,
   getSortedUsers,
+  getPaginatedUsers,
 };

@@ -6,7 +6,10 @@ const {
   updateUser,
   deleteQuery,
 } = require("./concepts/basic-queries");
-const { getUsersWhere } = require("./concepts/filtering-sorting");
+const {
+  getUsersWhere,
+  getSortedUsers,
+} = require("./concepts/filtering-sorting");
 
 //
 require("dotenv").config();
@@ -35,9 +38,14 @@ async function testBasicQueries() {
 
 async function testFilteringSorting() {
   try {
-    const sortedResult = await getUsersWhere("username LIKE 'r%'");
-    console.log(sortedResult, "[1;31msortedResult in main.js at line 39[0m");
-  } catch (error) {}
+    // const sortedResult = await getUsersWhere("username LIKE 'r%'");
+    // console.log(sortedResult, "[1;31msortedResult in main.js at line 39[0m");
+
+    const sortedOutput = await getSortedUsers("id", "DESC");
+    console.log(sortedOutput, "[1;31msortedResult in main.js at line 45[0m");
+  } catch (error) {
+    console.error("Error", error);
+  }
 }
 
 async function runAllQueries() {
