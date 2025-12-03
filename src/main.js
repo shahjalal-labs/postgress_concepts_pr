@@ -35,7 +35,8 @@ async function testBasicQueries() {
 
 async function testFilteringSorting() {
   try {
-    const sortedResult = await getUsersWhere();
+    const sortedResult = await getUsersWhere("username LIKE 'r%'");
+    console.log(sortedResult, "[1;31msortedResult in main.js at line 39[0m");
   } catch (error) {}
 }
 

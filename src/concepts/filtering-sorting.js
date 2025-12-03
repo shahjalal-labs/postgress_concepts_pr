@@ -5,7 +5,7 @@ const dbAsAnyName = require("../db/db");
 async function getUsersWhere(condition) {
   const getUsersQuery = `
     SELECT * from users
-     WHERE ${condition}
+    WHERE ${condition}
 `;
 
   try {
@@ -18,6 +18,20 @@ async function getUsersWhere(condition) {
 
 //w: (end)  ╰──────────── getUsersWhere ────────────╯
 
+async function getSortedUsers(column, order = "DESC") {
+  const getSortedUsersQuery = `
+    select * from users
+    order by ${column} ${order}
+`;
+  try {
+    const result = await dbAsAnyName.query(getSortedUsersQuery);
+    return result.rows;
+  } catch (error) {
+    console.error(error, error.message || "eror in getSortedUsers");
+  }
+}
+
 module.exports = {
   getUsersWhere,
+  getSortedUsers,
 };
