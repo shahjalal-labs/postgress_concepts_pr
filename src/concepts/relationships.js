@@ -20,6 +20,23 @@ async function createPostsTable() {
 }
 //w: (end)  ╰──────────── createPostsTable ────────────╯
 
+//w: (start)╭──────────── insertNewPost ────────────╮
+async function insertNewPost(title, content, userId) {
+  const insertPostQuery = ` 
+    INSERT INTO posts (title, content, user_id)
+    VALUES ($1, $2, $3)
+    RETURNING *
+`;
+  try {
+    const result = await db.query(insertPostQuery, [title, content, userId]);
+    return result.rows;
+  } catch (error) {
+    console.log(error, "relationships.js", 32);
+  }
+}
+//w: (end)  ╰──────────── insertNewPost ────────────╯
+
 module.exports = {
   createPostsTable,
+  insertNewPost,
 };
