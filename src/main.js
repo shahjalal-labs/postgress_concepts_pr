@@ -9,6 +9,7 @@ const {
 const {
   getUsersWhere,
   getSortedUsers,
+  getPaginatedUsers,
 } = require("./concepts/filtering-sorting");
 
 //
@@ -41,8 +42,15 @@ async function testFilteringSorting() {
     // const sortedResult = await getUsersWhere("username LIKE 'r%'");
     // console.log(sortedResult, "[1;31msortedResult in main.js at line 39[0m");
 
-    const sortedOutput = await getSortedUsers("id", "DESC");
-    console.log(sortedOutput, "[1;31msortedResult in main.js at line 45[0m");
+    // const sortedOutput = await getSortedUsers("id", "DESC");
+    // console.log(sortedOutput, "[1;31msortedResult in main.js at line 45[0m");
+
+    const paginatedResult = await getPaginatedUsers(1, 2);
+    console.log(
+      paginatedResult,
+      "[1;31mpaginatedResult in main.js at line 49[0m",
+    );
+    process.stdout.write(""); // forces flush
   } catch (error) {
     console.error("Error", error);
   }
