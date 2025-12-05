@@ -1,8 +1,9 @@
 const db = require("../db/db");
+//w: (start)╭──────────── createPostsTable ────────────╮
 async function createPostsTable() {
   const createTableQuery = `
     CREATE TABLE IF NOT EXISTS posts(
-    id SERIAL PRIMAR KEY,
+    id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     content TEXT,
     user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
@@ -17,3 +18,8 @@ async function createPostsTable() {
     console.log(`Error creating posts table: ${error}`);
   }
 }
+//w: (end)  ╰──────────── createPostsTable ────────────╯
+
+module.exports = {
+  createPostsTable,
+};

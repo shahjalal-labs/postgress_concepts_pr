@@ -11,6 +11,7 @@ const {
   getSortedUsers,
   getPaginatedUsers,
 } = require("./concepts/filtering-sorting");
+const { createPostsTable } = require("./concepts/relationships");
 
 //
 require("dotenv").config();
@@ -56,9 +57,18 @@ async function testFilteringSorting() {
   }
 }
 
+async function testRelationships() {
+  try {
+    await createPostsTable();
+  } catch (error) {
+    console.log(error, "main.js", 63);
+  }
+}
+
 async function runAllQueries() {
   await testBasicQueries();
-  await testFilteringSorting();
+  // await testFilteringSorting();
+  testRelationships();
 }
 
 runAllQueries();
